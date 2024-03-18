@@ -3,6 +3,10 @@ provider "azurerm" {
   features {}
 }
 
+provider "github" {
+  token = var.github_token
+}
+
 # Include variables from variables.tf
 terraform {
   required_version = ">= 0.13"
