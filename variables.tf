@@ -38,14 +38,3 @@ variable "storage-account-container" {
 variable "blob" {
   default = "test_dna"
 }
-
-variable "github_token" {
-  description = "GitHub personal access token"
-  type        = string
-}
-
-variable "github_repository" {
-  description = "GitHub repository in the format 'username/repo'"
-  type        = string
-}
-
