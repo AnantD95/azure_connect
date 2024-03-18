@@ -158,14 +158,19 @@ resource "azurerm_storage_container" "data-storage" {
   container_access_type = "private"
 }
 
+# Data source to read the contents of the file from GitHub
+data "github_file" "test_file" {
+  repository = "AnantD95/azure_connect"
+  file_path  = "test.txt"  # Path to the file in the GitHub repository
+}
+
 # Upload a file to the storage account
 resource "azurerm_storage_blob" "blob" {
   name                   = var.blob
   storage_account_name   = azurerm_storage_account.storage.name
   storage_container_name = azurerm_storage_container.data-storage.name
   type                   = "Block"
-  source                 = "test.txt"  # Local path to file you want to upload
-}
+  source                 = data.github_file.test_file.content_base64
 
 
 # Create an Azure VM extension to run PowerShell script
