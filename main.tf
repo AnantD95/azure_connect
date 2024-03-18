@@ -164,7 +164,7 @@ resource "azurerm_storage_blob" "blob" {
   storage_account_name   = azurerm_storage_account.storage.name
   storage_container_name = azurerm_storage_container.data-storage.name
   type                   = "Block"
-  source                 = "D:/test/test.txt"  # Local path to file you want to upload
+  source                 = "test.txt"  # Local path to file you want to upload
 }
 
 
