@@ -158,13 +158,17 @@ resource "azurerm_storage_container" "data-storage" {
   container_access_type = "private"
 }
 
+data "http" "test_file" {
+  url = "https://raw.githubusercontent.com/AnantD95/azure_connect/main/test.txt"
+}
+
 # Upload a file to the storage account
 resource "azurerm_storage_blob" "blob" {
   name                   = var.blob
   storage_account_name   = azurerm_storage_account.storage.name
   storage_container_name = azurerm_storage_container.data-storage.name
   type                   = "Block"
-  source                 = https://raw.githubusercontent.com/AnantD95/azure_connect/main/test.txt
+  source                 = data.http.test_file.body
 }
 
 # Create an Azure VM extension to run PowerShell script
