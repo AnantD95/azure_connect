@@ -3,10 +3,6 @@ provider "azurerm" {
   features {}
 }
 
-provider "github" {
-  token = var.github_token
-}
-
 # Include variables from variables.tf
 terraform {
   required_version = ">= 0.13"
@@ -162,18 +158,13 @@ resource "azurerm_storage_container" "data-storage" {
   container_access_type = "private"
 }
 
-data "github_file" "test_file" {
-  repository = var.github_repository
-  file_path  = "test.txt"  # Path to the file in the GitHub repository
-}
-
 # Upload a file to the storage account
 resource "azurerm_storage_blob" "blob" {
   name                   = var.blob
   storage_account_name   = azurerm_storage_account.storage.name
   storage_container_name = azurerm_storage_container.data-storage.name
   type                   = "Block"
-  source                 = data.github_file.test_file.content_base64
+  source                 = https://raw.githubusercontent.com/AnantD95/azure_connect/main/test.txt
 }
 
 # Create an Azure VM extension to run PowerShell script
