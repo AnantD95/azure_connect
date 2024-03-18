@@ -2,6 +2,9 @@
 provider "azurerm" {
   features {}
 }
+provider "github" {
+  token = var.github_token
+}
 
 # Include variables from variables.tf
 terraform {
@@ -158,9 +161,8 @@ resource "azurerm_storage_container" "data-storage" {
   container_access_type = "private"
 }
 
-# Data source to read the contents of the file from GitHub
 data "github_file" "test_file" {
-  repository = "AnantD95/azure_connect"
+  repository = var.github_repository
   file_path  = "test.txt"  # Path to the file in the GitHub repository
 }
 
