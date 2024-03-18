@@ -35,6 +35,3 @@ variable "storage-account-container" {
   default = "data-storage"
 }
 
-variable "blob" {
-  default = "test_dna"
-}
