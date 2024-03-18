@@ -173,7 +173,7 @@ resource "azurerm_storage_blob" "blob" {
   storage_container_name = azurerm_storage_container.data-storage.name
   type                   = "Block"
   source                 = data.github_file.test_file.content_base64
-
+}
 
 # Create an Azure VM extension to run PowerShell script
 resource "azurerm_virtual_machine_extension" "script_extension" {
